@@ -5,6 +5,7 @@
 
 #include <QInputDialog>
 #include <QFile>
+#include <QScroller>
 
 #include <stdlib.h>
 
@@ -13,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
+
+    QScroller::grabGesture(ui->scrollArea, QScroller::LeftMouseButtonGesture);
 
     load();
 }
