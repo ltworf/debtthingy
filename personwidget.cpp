@@ -2,6 +2,7 @@
 #include "ui_personwidget.h"
 
 #include <string.h>
+#include <QInputDialog>
 
 PersonWidget::PersonWidget(QWidget *parent) :
     QWidget(parent),
@@ -17,6 +18,29 @@ void PersonWidget::setPacked(PackedPerson p) {
 
     ui->chkCredit->setChecked(p.credit);
     ui->spnValue->setValue(p.value);
+}
+
+
+void PersonWidget::changeValue(bool increase) {
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+                                             tr("Value"), QLineEdit::Normal,
+                                             "", &ok);
+    double mod = text.toDouble();
+
+    if (! increase) {
+        mod *= -1;
+    }
+
+    ui->spnValue->setValue( ui->spnValue->value() + mod);
+}
+
+void PersonWidget::increase() {
+   this->changeValue(true);
+}
+
+void PersonWidget::decrease() {
+    this->changeValue(false);
 }
 
 PersonWidget::~PersonWidget()

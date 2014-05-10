@@ -30,6 +30,8 @@ public:
 private slots:
     void button_toggle(bool);
     void value_changed();
+    void increase();
+    void decrease();
 
 signals:
     void changed();
@@ -37,6 +39,7 @@ signals:
 
 private:
     Ui::PersonWidget *ui;
+    void changeValue(bool);
 };
 
 #endif // PERSONWIDGET_H
