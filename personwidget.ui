@@ -13,12 +13,43 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">* {
+background-color: white;
+}
+
+ QCheckBox::indicator {
+     width: 30px;
+     height: 30px;
+ }
+
+ QPushButton {
+     background-color: white;
+     color: black;
+     border-style: solid;
+     border-width: 1px;
+     border-color: rgb(212, 212, 212);
+     font: bold 36px;
+     padding: 6px;
+     min-width: 2em;
+ }
+ QPushButton:pressed {
+     background-color: rgb(186, 186, 186);
+	 color: white;
+ }
+ QPushButton:hover {
+     background-color: rgb(238, 238, 238);
+ }</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QPushButton" name="btnName">
      <property name="font">
       <font>
-       <pointsize>24</pointsize>
+       <pointsize>-1</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
       </font>
      </property>
      <property name="text">
@@ -28,36 +59,36 @@
       <bool>true</bool>
      </property>
      <property name="flat">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QFrame" name="frame">
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Sunken</enum>
+      <enum>QFrame::Plain</enum>
      </property>
      <property name="lineWidth">
       <number>0</number>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
-       <number>0</number>
+       <number>5</number>
       </property>
       <property name="leftMargin">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="topMargin">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>2</number>
+       <number>0</number>
       </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -66,49 +97,18 @@
         </property>
         <item>
          <widget class="QCheckBox" name="chkCredit">
-          <property name="palette">
-           <palette>
-            <active>
-             <colorrole role="WindowText">
-              <brush brushstyle="SolidPattern">
-               <color alpha="255">
-                <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
-               </color>
-              </brush>
-             </colorrole>
-            </active>
-            <inactive>
-             <colorrole role="WindowText">
-              <brush brushstyle="SolidPattern">
-               <color alpha="255">
-                <red>255</red>
-                <green>255</green>
-                <blue>255</blue>
-               </color>
-              </brush>
-             </colorrole>
-            </inactive>
-            <disabled>
-             <colorrole role="WindowText">
-              <brush brushstyle="SolidPattern">
-               <color alpha="255">
-                <red>111</red>
-                <green>110</green>
-                <blue>108</blue>
-               </color>
-              </brush>
-             </colorrole>
-            </disabled>
-           </palette>
-          </property>
           <property name="font">
            <font>
             <pointsize>24</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"> QCheckBox::indicator {
+     width: 30px;
+     height: 30px;
+ }</string>
           </property>
           <property name="text">
            <string>Credit</string>
@@ -125,6 +125,9 @@
           <property name="frame">
            <bool>false</bool>
           </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::PlusMinus</enum>
           </property>
@@ -137,6 +140,9 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="spacing">
+         <number>10</number>
+        </property>
         <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
@@ -154,8 +160,14 @@
          <widget class="QPushButton" name="btnIncrease">
           <property name="font">
            <font>
-            <pointsize>40</pointsize>
+            <pointsize>-1</pointsize>
+            <weight>75</weight>
+            <italic>false</italic>
+            <bold>true</bold>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>+</string>
@@ -166,7 +178,10 @@
          <widget class="QPushButton" name="btnDecrease">
           <property name="font">
            <font>
-            <pointsize>40</pointsize>
+            <pointsize>-1</pointsize>
+            <weight>75</weight>
+            <italic>false</italic>
+            <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -177,6 +192,16 @@
        </layout>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
     </widget>
    </item>
   </layout>
