@@ -10,8 +10,8 @@ struct PackedPerson;
 }
 
 struct PackedPerson {
-    bool credit;
     char name[100];
+    char currency[15];
     double value;
 };
 
@@ -32,6 +32,7 @@ private slots:
     void value_changed();
     void increase();
     void decrease();
+    void set_currency();
 
 signals:
     void changed();

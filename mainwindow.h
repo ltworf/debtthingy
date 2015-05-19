@@ -2,8 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsBlurEffect>
 
 #include <vector>
+
 
 #include "personwidget.h"
 
@@ -36,7 +38,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     std::vector<PersonWidget*> people_vector;
-
+    QGraphicsBlurEffect* eff;
     void clear_vector();
 };
 

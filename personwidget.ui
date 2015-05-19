@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>423</width>
+    <width>436</width>
     <height>240</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -51,6 +57,9 @@ background-color: white;
        <italic>false</italic>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>PushButton</string>
@@ -96,31 +105,14 @@ background-color: white;
          <number>5</number>
         </property>
         <item>
-         <widget class="QCheckBox" name="chkCredit">
-          <property name="font">
-           <font>
-            <pointsize>24</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"> QCheckBox::indicator {
-     width: 30px;
-     height: 30px;
- }</string>
-          </property>
-          <property name="text">
-           <string>Credit</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QDoubleSpinBox" name="spnValue">
           <property name="font">
            <font>
             <pointsize>24</pointsize>
            </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
           </property>
           <property name="frame">
            <bool>false</bool>
@@ -131,8 +123,21 @@ background-color: white;
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::PlusMinus</enum>
           </property>
+          <property name="minimum">
+           <double>-100000000.989999994635582</double>
+          </property>
           <property name="maximum">
            <double>100000000.989999994635582</double>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnCurrency">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+           <string>Sek</string>
           </property>
          </widget>
         </item>
@@ -166,6 +171,9 @@ background-color: white;
             <bold>true</bold>
            </font>
           </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
           <property name="styleSheet">
            <string notr="true"/>
           </property>
@@ -183,6 +191,9 @@ background-color: white;
             <italic>false</italic>
             <bold>true</bold>
            </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
           </property>
           <property name="text">
            <string>-</string>
@@ -225,30 +236,14 @@ background-color: white;
    </hints>
   </connection>
   <connection>
-   <sender>chkCredit</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>PersonWidget</receiver>
-   <slot>value_changed()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>44</x>
-     <y>123</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>6</x>
-     <y>77</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>spnValue</sender>
    <signal>valueChanged(double)</signal>
    <receiver>PersonWidget</receiver>
    <slot>value_changed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>346</x>
-     <y>121</y>
+     <x>285</x>
+     <y>129</y>
     </hint>
     <hint type="destinationlabel">
      <x>316</x>
@@ -263,8 +258,8 @@ background-color: white;
    <slot>increase()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>52</x>
-     <y>186</y>
+     <x>276</x>
+     <y>212</y>
     </hint>
     <hint type="destinationlabel">
      <x>211</x>
@@ -288,11 +283,28 @@ background-color: white;
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnCurrency</sender>
+   <signal>clicked()</signal>
+   <receiver>PersonWidget</receiver>
+   <slot>set_currency()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>372</x>
+     <y>88</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>428</x>
+     <y>123</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>button_toggle(bool)</slot>
   <slot>value_changed()</slot>
   <slot>decrease()</slot>
   <slot>increase()</slot>
+  <slot>set_currency()</slot>
  </slots>
 </ui>

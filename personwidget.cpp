@@ -12,20 +12,32 @@ PersonWidget::PersonWidget(QWidget *parent) :
     ui->frame->setVisible(false);
 }
 
+
 void PersonWidget::setPacked(PackedPerson p) {
     QString name = QString::fromLocal8Bit(p.name);
+    QString currency = QString::fromLocal8Bit(p.currency);
     ui->btnName->setText(name);
-
-    ui->chkCredit->setChecked(p.credit);
     ui->spnValue->setValue(p.value);
+    ui->btnCurrency->setText(currency);
 }
+
+void PersonWidget::set_currency() {
+    bool ok;
+    QString currency = QInputDialog::getText(this, tr("Insert new currency"),tr("Currency"), QLineEdit::Normal, "", &ok);
+    if (!ok) return;
+
+    ui->btnCurrency->setText(currency);
+    emit changed();
+}
+
 
 
 void PersonWidget::changeValue(bool increase) {
     bool ok;
-    QString text = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+    QString text = QInputDialog::getText(this, tr("Insert Δ"),
                                              tr("Value"), QLineEdit::Normal,
                                              "", &ok);
+    if (!ok) return;
     double mod = text.toDouble();
 
     if (! increase) {
@@ -66,15 +78,15 @@ void PersonWidget::value_changed() {
 
 PackedPerson PersonWidget::getPacked() {
     PackedPerson r;
-
-    r.credit = ui->chkCredit->isChecked();
     r.value = ui->spnValue->value();
 
     QByteArray name = ui->btnName->text().toLocal8Bit();
+    QByteArray currency = ui->btnCurrency->text().toLocal8Bit();
 
     memset(r.name, 0,sizeof(r.name));
     strncpy(r.name,name.data(),sizeof(r.name)-1);
+    memset(r.currency,0, sizeof(r.currency));
+    strncpy(r.currency,currency.data(),sizeof(r.currency));
 
     return r;
-
 }

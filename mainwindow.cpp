@@ -6,25 +6,44 @@
 #include <QInputDialog>
 #include <QFile>
 #include <QScroller>
+#include <QGraphicsBlurEffect>
 
 #include <stdlib.h>
 
+union conv {
+    PackedPerson person;
+    char data[sizeof(PackedPerson)];
+};
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
+    eff = new QGraphicsBlurEffect();
+
+    this->setGraphicsEffect(eff);
+    eff->setBlurRadius(0);
+
     QScroller::grabGesture(ui->scrollArea, QScroller::LeftMouseButtonGesture);
 
     load();
 }
 
+#include <QPropertyAnimation>
+#include <QGraphicsOpacityEffect>
+
 void MainWindow::addPerson() {
+
+
+
     bool ok;
-    QString text = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+    QString text = QInputDialog::getText(this, tr("Insert new person"),
                                              tr("User name:"), QLineEdit::Normal,
                                              "", &ok);
+    if (!ok) {
+        return;
+    }
 
     PersonWidget *p = new PersonWidget();
     p->setName(text);
@@ -66,17 +85,19 @@ void MainWindow::load() {
     QFile file(savedfile);
     file.open(QIODevice::ReadOnly | QIODevice::Truncate);
 
-    PackedPerson data;
-    while (file.read((char*)&data,sizeof(PackedPerson))==sizeof(PackedPerson)) {
+    union conv record;
+    while (file.read(record.data,sizeof(PackedPerson))==sizeof(PackedPerson)) {
         PersonWidget *p = new PersonWidget();
 
-        p->setPacked(data);
+        p->setPacked(record.person);
         people_vector.push_back(p);
         ui->frame->layout()->addWidget(p);
         QObject::connect(p, &PersonWidget::changed, this, &MainWindow::store);
     }
     file.close();
 }
+
+
 
 void MainWindow::store() {
 
@@ -90,10 +111,9 @@ void MainWindow::store() {
     file.open(QIODevice::WriteOnly | QIODevice::Truncate);
 
     for (size_t i=0; i< people_vector.size(); i++) {
-
-        PackedPerson data = people_vector[i]->getPacked();
-        char* ptr = (char*)(&data);
-        if (file.write(ptr,sizeof(PackedPerson)) != sizeof(PackedPerson)) {
+        union conv record;
+        record.person = people_vector[i]->getPacked();
+        if (file.write(record.data,sizeof(PackedPerson)) != sizeof(PackedPerson)) {
             //TODO Do something about it?
             break;
         }
@@ -105,5 +125,6 @@ void MainWindow::store() {
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete eff;
 }
 
