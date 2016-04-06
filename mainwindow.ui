@@ -16,6 +16,7 @@
   <property name="styleSheet">
    <string notr="true">* {
 background-color: white;
+color: black;
 }
 
 QPushButton {
@@ -156,8 +157,8 @@ background-color:  rgb(255, 51, 15);
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>527</width>
-         <height>207</height>
+         <width>533</width>
+         <height>213</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
